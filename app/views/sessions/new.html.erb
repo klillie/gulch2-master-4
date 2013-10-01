@@ -1,0 +1,32 @@
+<h1>Input Zip Code in the New Sessions View!</h1>
+
+<div class="row">
+	<div class="span6 offset3">
+		
+		<%=form_for(:session, url: sessions_path) do |f| %>
+
+			<br> <!-- enters a blank line, ie: line break -->
+			<%= f.label :zip_code %>
+			<%= f.text_field :current_zip, {:value => '07004'} %>
+
+			<br> <!-- enters a blank line, ie: line break -->
+			<%= f.label :demand_kW %>
+			<%= f.text_field :current_demand, {:value => '100'} %>
+
+			<br> <!-- enters a blank line, ie: line break -->
+			<%= f.label :usage_kWh %>
+			<%= f.text_field :current_usage, {:value => '10000'} %>
+
+			<br> <!-- enters a blank line, ie: line break -->
+			<%= f.label :bill_date %>
+			<%= f.text_field :current_date, {:value => '9/23/2013'} %>
+
+			<br> <!-- enters a blank line, ie: line break -->
+			<%= f.label :phases %>
+			<%= f.text_field :current_phases, {:value => '3-phase'} %>
+
+			<br> <!-- enters a blank line, ie: line break -->
+			<%= f.submit "Submit", class: "btn btn-large btn-primary" %>
+		<% end %>
+	</div>
+</div>

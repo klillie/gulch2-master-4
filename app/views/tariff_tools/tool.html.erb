@@ -1,0 +1,67 @@
+<h1>Bill Comparison Demo</h1>
+
+<p>
+	This is the page where the Bill Comparison Demo will reside
+</p>
+<p>
+	<% @zip = session[:current_zip] %>
+	<% @demand = session[:current_demand] %>
+	<% @usage = session[:current_usage] %>
+	<% @date = session[:current_date] %>
+	<% @phases = session[:current_phases] %>
+	
+
+	<br> <!-- enters a blank line, ie: line break -->
+	Zip Code input: <%= @zip %>
+
+	<br> <!-- enters a blank line, ie: line break -->
+	Demand (kW) input: <%= @demand %> 
+
+	<br> <!-- enters a blank line, ie: line break -->
+	Usage (kWh) input: <%= @usage %>
+
+	<br> <!-- enters a blank line, ie: line break -->
+	Date input: <%= @date %>
+
+	<br> <!-- enters a blank line, ie: line break -->
+	Phases input: <%= @phases %>
+
+</p>
+
+<p>
+	
+	<br> <!-- enters a blank line, ie: line break -->
+	Utility: <%= TariffUtility.utility(@zip) %>
+	<br> <!-- enters a blank line, ie: line break -->
+	Territory: <%= TariffTerritory.territory(@zip) %>
+	<br> <!-- enters a blank line, ie: line break -->
+	<% @season = TariffSeason.season(@date, @zip) %> 
+	Season: <%= @season[0].season_type %>
+	<br> <!-- enters a blank line, ie: line break -->
+	
+	<br> <!-- enters a blank line, ie: line break -->
+	<% @tou = TariffTou.tou(@date, @zip) %>
+	<% @tou.each do |i| %>
+		Tou <%= i.id %>: <%= i.tou_type %> on <%= i.day_of_week %>, 
+				starts @ <%= i.start_time %> and ends @ <%= i.end_time %>
+		<br> <!-- enters a blank line, ie: line break -->
+	<% end %>
+	
+	<br> <!-- enters a blank line, ie: line break -->
+	<% @meter_read = TariffMeterRead.meter_read(@date, @zip) %>
+	Meter read start date: <%=@meter_read["start_date"] %>
+	<br> <!-- enters a blank line, ie: line break -->
+	Meter read end date: <%=@meter_read["end_date"] %>
+	<br> <!-- enters a blank line, ie: line break -->
+	Meter read month: <%=@meter_read["billing_month"] %>
+	<br> <!-- enters a blank line, ie: line break -->
+	Meter read year: <%=@meter_read["billing_year"] %>
+	<br> <!-- enters a blank line, ie: line break -->
+
+	<br> <!-- enters a blank line, ie: line break -->
+	<% @billing_class = TariffBillingClass.billing_class(@zip, @demand, @usage, @phases) %>
+	Billing Class: <%= @billing_class[0].name %>
+	
+
+	
+</p>
